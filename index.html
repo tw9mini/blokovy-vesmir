@@ -29,13 +29,34 @@ const tubes=[],endCaps=[],paths=[];
 // Jedna vodorovná orezávacia rovina pre všetky svetové trubice.
 renderer.localClippingEnabled=true;
 const cutPlane=new THREE.Plane(new THREE.Vector3(0,0,-1),0);
+// Svetová trubica je časová extrúzia priestorového kotúča: v každom okamihu
+// leží kotúč s polomerom planéty v rovine kolmej na časovú os. Prienik s
+// rovinou času je preto kruh a zhoduje sa s kotúčom v PIP náhľade.
+function extrudedWorldTube(path,radius,segments){
+ const position=[],index=[];
+ for(let s=0;s<=steps;s++){
+  const c=path.getPoint(s/steps);
+  for(let a=0;a<=segments;a++){
+   const th=a/segments*TWO;
+   position.push(c.x+radius*Math.cos(th),c.y+radius*Math.sin(th),c.z);
+  }
+ }
+ for(let s=0;s<steps;s++)for(let a=0;a<segments;a++){
+  const i0=s*(segments+1)+a,i1=i0+1,j0=(s+1)*(segments+1)+a,j1=j0+1;
+  index.push(i0,i1,j0,i1,j1,j0);
+ }
+ const geometry=new THREE.BufferGeometry();
+ geometry.setAttribute('position',new THREE.Float32BufferAttribute(position,3));
+ geometry.setIndex(index);
+ geometry.computeVertexNormals();
+ return geometry;
+}
 for(let i=0;i<4;i++){
  const path=tubePath(i);paths.push(path);
- const geometry=new THREE.TubeGeometry(path,steps,radii[i],i===0?24:14,false);
+ const geometry=extrudedWorldTube(path,radii[i],i===0?24:14);
  const material=new THREE.MeshStandardMaterial({color:colors[i],roughness:i===0?.42:.54,metalness:.08,side:THREE.FrontSide,emissive:i===0?0xff8c20:0x000000,emissiveIntensity:i===0?.38:0,clippingPlanes:[cutPlane]});
  const mesh=new THREE.Mesh(geometry,material);mesh.frustumCulled=false;tubeGroup.add(mesh);tubes.push(mesh);
- // Uzáver je vodorovný rez, nie guľová koncovka.
- // Elipsa zodpovedá rezu šikmej svetovej trubice rovinou z=konšt.
+ // Uzáver leží priamo v orezávacej rovine, takže je to ten istý kruh ako v 2D reze.
  const capMaterial=new THREE.MeshStandardMaterial({color:colors[i],roughness:.55,metalness:.08,side:THREE.DoubleSide,emissive:i===0?0xff8c20:0x000000,emissiveIntensity:i===0?.38:0});
  const cap=new THREE.Mesh(new THREE.CircleGeometry(radii[i],64),capMaterial);tubeGroup.add(cap);endCaps.push(cap);
 }
@@ -50,18 +71,12 @@ function setRevealedTime(t){
  // Normála smeruje nadol: viditeľná zostáva len geometria pod rezom.
  cutPlane.constant=z;
  for(let i=0;i<tubes.length;i++){
-  tubes[i].geometry.setDrawRange(0,Infinity);
   tubes[i].visible=t>0;
   const cap=endCaps[i];cap.visible=t>0;
-  const p=paths[i].getPointAt(t);
+  // getPoint nie getPointAt: parameter je čas, takže z presne sedí na rovinu rezu.
+  const p=paths[i].getPoint(t);
   // Malý offset eliminuje z-fighting s orezaným povrchom.
   cap.position.set(p.x,p.y,z+.002);
-  const a=paths[i].getPointAt(Math.max(0,t-.0002));
-  const b=paths[i].getPointAt(Math.min(1,t+.0002));
-  const dx=(b.x-a.x)/(b.z-a.z||1),dy=(b.y-a.y)/(b.z-a.z||1);
-  const slope=Math.hypot(dx,dy);
-  cap.rotation.z=Math.atan2(dy,dx);
-  cap.scale.set(Math.sqrt(1+slope*slope),1,1);
  }
 }
 for(let i=0;i<layerCount;i++){const t=i/(layerCount-1),z=H*(t-.5),group=new THREE.Group();group.position.z=z;let pane=new THREE.Mesh(new THREE.PlaneGeometry(17.5,17.5),mat(0x4ca2d0,.085,{depthWrite:false}));group.add(pane);let border=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5)),new THREE.LineBasicMaterial({color:0x65e3fa,transparent:true,opacity:.28}));group.add(border);for(let j=0;j<3;j++){let p=j===0?new THREE.Vector3():pos(j,t);let circle=new THREE.Mesh(new THREE.CircleGeometry(radii[j],24),mat(colors[j],.2,{depthWrite:false}));circle.position.set(p.x,p.y,.025);group.add(circle)}layerGroup.add(group)}
