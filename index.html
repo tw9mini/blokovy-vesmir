@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Blokový vesmír — keď sa čas stane geometriou</title><style>
-:root{color-scheme:dark;--bg:#070b17;--panel:#111b2c;--line:#27364b;--ink:#edf4ff;--muted:#91a6bf;--cyan:#65e3fa;--gold:#ffc46a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,Segoe UI,sans-serif;overflow:hidden}canvas{display:block}#stage{position:fixed;inset:0}#hud{position:fixed;inset:0;pointer-events:none}header{position:absolute;left:32px;top:24px;max-width:600px}header .eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}h1{margin:5px 0 5px;font-size:clamp(25px,3vw,42px);line-height:1.1;letter-spacing:-.035em}header p{color:var(--muted);margin:7px 0;font-size:13px}#chapter{position:absolute;left:50%;transform:translateX(-50%);bottom:144px;width:min(620px,calc(100vw - 40px));text-align:center;font-size:clamp(17px,2vw,26px);font-weight:600;text-shadow:0 2px 20px #000}#chapter small{display:block;color:var(--cyan);font-size:11px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:7px}#controls{pointer-events:auto;position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(920px,calc(100vw - 24px));padding:16px 20px;background:#101b2ceF;border:1px solid #354861;border-radius:18px;box-shadow:0 15px 50px #0009;backdrop-filter:blur(18px)}.row{display:flex;align-items:center;gap:13px;flex-wrap:wrap}.row+.row{margin-top:12px}button{cursor:pointer;background:#1b2b42;border:1px solid #3b5069;color:var(--ink);padding:9px 14px;border-radius:9px;font-weight:650}button:hover{border-color:var(--cyan)}button.active,button.primary{background:#125a73;border-color:#36b8d8}button:disabled{opacity:.45;cursor:not-allowed}label{color:var(--muted);font-size:12px}input[type=range]{accent-color:var(--cyan);flex:1;min-width:120px}#timeValue{font-variant-numeric:tabular-nums;color:var(--cyan);min-width:66px;text-align:right}#status{margin-left:auto;color:var(--muted);font-size:12px}#hint{position:absolute;right:24px;top:27px;text-align:right;color:var(--muted);font-size:12px}#progress{position:absolute;left:0;bottom:0;height:3px;background:var(--cyan);width:0%;border-radius:0 0 18px 18px}#info{position:absolute;right:25px;bottom:165px;max-width:260px;color:var(--muted);font-size:12px;text-align:right}#legend{position:absolute;left:32px;top:135px;display:grid;gap:7px;font-size:12px;color:#b3c5d9}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:9px}#skip{pointer-events:auto;position:absolute;right:25px;top:80px}@media(max-width:650px){header{left:15px;top:13px}header p{display:none}#hint,#legend,#info{display:none}#skip{top:94px;right:14px}#chapter{bottom:205px}#controls{padding:12px}.row{gap:7px}button{padding:7px 10px}#status{display:none}}
+:root{color-scheme:dark;--bg:#070b17;--panel:#111b2c;--line:#27364b;--ink:#edf4ff;--muted:#91a6bf;--cyan:#65e3fa;--gold:#ffc46a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,system-ui,Segoe UI,sans-serif;overflow:hidden}canvas{display:block}#stage{position:fixed;inset:0}#hud{position:fixed;inset:0;pointer-events:none}header{position:absolute;left:32px;top:24px;max-width:600px}header .eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}h1{margin:5px 0 5px;font-size:clamp(25px,3vw,42px);line-height:1.1;letter-spacing:-.035em}header p{color:var(--muted);margin:7px 0;font-size:13px}#chapter{position:absolute;left:50%;transform:translateX(-50%);bottom:144px;width:min(620px,calc(100vw - 40px));text-align:center;font-size:clamp(17px,2vw,26px);font-weight:600;text-shadow:0 2px 20px #000}#chapter small{display:block;color:var(--cyan);font-size:11px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:7px}#controls{pointer-events:auto;position:absolute;left:50%;bottom:20px;transform:translateX(-50%);width:min(920px,calc(100vw - 24px));padding:16px 20px;background:#101b2ceF;border:1px solid #354861;border-radius:18px;box-shadow:0 15px 50px #0009;backdrop-filter:blur(18px)}.row{display:flex;align-items:center;gap:13px;flex-wrap:wrap}.row+.row{margin-top:12px}button{cursor:pointer;background:#1b2b42;border:1px solid #3b5069;color:var(--ink);padding:9px 14px;border-radius:9px;font-weight:650}button:hover{border-color:var(--cyan)}button.active,button.primary{background:#125a73;border-color:#36b8d8}button:disabled{opacity:.45;cursor:not-allowed}label{color:var(--muted);font-size:12px}input[type=range]{accent-color:var(--cyan);flex:1;min-width:120px}#timeValue{font-variant-numeric:tabular-nums;color:var(--cyan);min-width:66px;text-align:right}#planetCount{color:var(--cyan);font-variant-numeric:tabular-nums;min-width:14px}#status{margin-left:auto;color:var(--muted);font-size:12px}#hint{position:absolute;right:24px;top:27px;text-align:right;color:var(--muted);font-size:12px}#progress{position:absolute;left:0;bottom:0;height:3px;background:var(--cyan);width:0%;border-radius:0 0 18px 18px}#info{position:absolute;right:25px;bottom:165px;max-width:260px;color:var(--muted);font-size:12px;text-align:right}#legend{position:absolute;left:32px;top:135px;display:grid;gap:7px;font-size:12px;color:#b3c5d9}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:9px}#skip{pointer-events:auto;position:absolute;right:25px;top:80px}@media(max-width:650px){header{left:15px;top:13px}header p{display:none}#hint,#legend,#info{display:none}#skip{top:94px;right:14px}#chapter{bottom:205px}#controls{padding:12px}.row{gap:7px}button{padding:7px 10px}#status{display:none}}
 #pip{position:fixed;right:24px;bottom:155px;width:min(310px,29vw);aspect-ratio:1;background:#071323ed;border:1px solid #4e7995;border-radius:12px;overflow:hidden;box-shadow:0 15px 40px #000a;display:none;pointer-events:auto}#pip canvas{width:100%;height:100%}#pipTitle{position:absolute;top:7px;left:10px;font-size:11px;color:#a6dff5;letter-spacing:.07em}#pipTime{position:absolute;bottom:7px;right:10px;font-size:11px;color:#a6dff5}#controls{width:min(790px,calc(100vw - 24px))}#info{display:none}@media(max-width:750px){#pip{width:170px;right:12px;bottom:170px}}
-</style></head><body><div id="stage"></div><div id="pip"><canvas id="pipCanvas" width="620" height="620"></canvas><div id="pipTitle">2D SVET · ČASOVÝ REZ</div><div id="pipTime"></div></div><div id="hud"><header><div class="eyebrow">Interaktívny fyzikálny experiment</div><h1>Blokový vesmír</h1><p>Keď sa pohyb v dvoch rozmeroch zmení na statickú geometriu v troch.</p></header><div id="legend"><span><i class="dot" style="background:#ffc46a"></i>Slnko</span><span><i class="dot" style="background:#62d9fc"></i>Vnútorná planéta</span><span><i class="dot" style="background:#c19cff"></i>Vonkajšia planéta</span><span><i class="dot" style="background:#ff6f9f"></i>Obyvateľ planéty</span></div><div id="hint">Myš: otáčanie · koliesko: priblíženie<br>Dvojklik: vycentrovať pohľad</div><button id="skip">Preskočiť úvod →</button><div id="chapter"><small id="chapterLabel">01 / 05</small><span id="chapterText">Predstav si vesmír, ktorý má iba dva priestorové rozmery.</span></div><div id="info"></div><section id="controls"><div class="row"><button id="play" class="primary">❚❚ Pozastaviť úvod</button><button id="replay">↺ Úvod odznova</button><button id="three" disabled>◎ Zobraziť celý blok</button><span id="status">Prebieha úvodná animácia</span></div><div class="row"><label for="time">Časový okamih</label><input id="time" type="range" min="0" max="1000" value="0" disabled><span id="timeValue">t = 0.00</span><button id="auto" disabled>▶ Prehrávať čas</button></div><div id="progress"></div></section></div>
+</style></head><body><div id="stage"></div><div id="pip"><canvas id="pipCanvas" width="620" height="620"></canvas><div id="pipTitle">2D SVET · ČASOVÝ REZ</div><div id="pipTime"></div></div><div id="hud"><header><div class="eyebrow">Interaktívny fyzikálny experiment</div><h1>Blokový vesmír</h1><p>Keď sa pohyb v dvoch rozmeroch zmení na statickú geometriu v troch.</p></header><div id="legend"><span><i class="dot" style="background:#ffc46a"></i>Slnko</span><span><i class="dot" style="background:#62d9fc"></i>Vnútorná planéta</span><span><i class="dot" style="background:#c19cff"></i>Vonkajšia planéta</span><span><i class="dot" style="background:#ff6f9f"></i>Obyvateľ planéty</span></div><div id="hint">Myš: otáčanie · koliesko: priblíženie<br>Dvojklik: vycentrovať pohľad</div><button id="skip">Preskočiť úvod →</button><div id="chapter"><small id="chapterLabel">01 / 05</small><span id="chapterText">Predstav si vesmír, ktorý má iba dva priestorové rozmery.</span></div><div id="info"></div><section id="controls"><div class="row"><button id="play" class="primary">❚❚ Pozastaviť úvod</button><button id="replay">↺ Úvod odznova</button><button id="three" disabled>◎ Zobraziť celý blok</button><span id="status">Prebieha úvodná animácia</span></div><div class="row"><label for="time">Časový okamih</label><input id="time" type="range" min="0" max="1000" value="0" disabled><span id="timeValue">t = 0.00</span><button id="auto" disabled>▶ Prehrávať čas</button></div><div class="row"><label for="planets">Planéty</label><input id="planets" type="range" min="2" max="8" value="2" step="1" disabled><span id="planetCount">2</span><button id="sunMotion" disabled title="Slnko obieha okolo galaktického stredu, takže aj jeho svetová čiara je zakrivená.">☀ Slnko obieha galaktický stred</button></div><div id="progress"></div></section></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from 'three';
@@ -15,50 +15,84 @@ const H=16,TWO=Math.PI*2,steps=500,layerCount=72;
 const mat=(color,opacity=1,extra={})=>new THREE.MeshBasicMaterial({color,transparent:opacity<1,opacity,side:THREE.DoubleSide,depthWrite:opacity>=1,...extra});
 const glow=(color,opacity)=>new THREE.MeshBasicMaterial({color,transparent:true,opacity,side:THREE.DoubleSide,depthWrite:false,blending:THREE.AdditiveBlending});
 const world=new THREE.Group();scene.add(world);const flat=new THREE.Group();world.add(flat);const block=new THREE.Group();world.add(block);
-function pos(which,t){let angle=TWO*(which===1?1.85:.87)*t+(which===1?.45:2.1),r=which===1?3.5:6.3;return new THREE.Vector3(r*Math.cos(angle),r*Math.sin(angle),0)}
-function disc(radius,color,parent){const mesh=new THREE.Mesh(new THREE.CircleGeometry(radius,48),mat(color));parent.add(mesh);return mesh}
-const sun=disc(.82,0xffc46a,flat),p1=disc(.36,0x62d9fc,flat),p2=disc(.48,0xc19cff,flat),person=disc(.105,0xff6f9f,flat);sun.position.z=.06;const rings=[];
-for(let r of [3.5,6.3]){let ring=new THREE.Mesh(new THREE.RingGeometry(r-.009,r+.009,160),mat(0x45617b,.4));ring.position.z=-.08;flat.add(ring);rings.push(ring)}
+// Teliesá: Slnko, ľubovoľný počet planét a jeden pozorovateľ na prvej planéte.
+const SUN_COLOR=0xffc46a,PERSON_COLOR=0xff6f9f;
+const PLANET_COLORS=[0x62d9fc,0xc19cff,0x8ef2b3,0xffd36a,0xff9d6f,0x9ad2ff,0xd6a3ff,0x7de3c4,0xffb0d2,0xc9f2a5];
+// Drift Slnka okolo galaktického stredu je malý oblúk, aby zväz trubíc vyletel z karty.
+const GALACTIC={radius:2.2,speed:.278,phase:-.873};
+let sunDrifts=false,planetCount=2;
+function sunPos(t){if(!sunDrifts)return new THREE.Vector3();const a=TWO*GALACTIC.speed*t+GALACTIC.phase;return new THREE.Vector3(GALACTIC.radius*Math.cos(a),GALACTIC.radius*Math.sin(a),0)}
+function makeBodies(count){
+ const list=[{name:'Slnko',color:SUN_COLOR,r:.82,parent:-1,orbit:0,speed:0,phase:0}];
+ // Dva východzie planéty presne ako v úvodnej animácii; pri viacerých sa dráhy rozložia geometricky 3,5..8.
+ const base=count===2?[{orbit:3.5,speed:1.85,phase:.45,r:.36},{orbit:6.3,speed:.87,phase:2.1,r:.48}]:null;
+ for(let k=0;k<count;k++){
+  const b=base?base[k]:null;
+  // Rýchlosti dodatočných planét držia 3. Keplerov zákon (T² ~ a³).
+  const orbit=b?b.orbit:3.5*Math.pow(8/3.5,k/(count-1));
+  list.push({name:b?(k===0?'Vnútorná planéta':'Vonkajšia planéta'):'Planéta '+(k+1),color:PLANET_COLORS[k%PLANET_COLORS.length],r:b?b.r:.3+.16*(((k*7)%5)/4),parent:0,orbit,speed:b?b.speed:1.85*Math.pow(3.5/orbit,1.5),phase:b?b.phase:.45+k*2.39996});
+ }
+ list.push({name:'Obyvateľ planéty',color:PERSON_COLOR,r:.09,parent:1,orbit:.46,speed:3.2,phase:.3});
+ return list;
+}
+let bodies=makeBodies(planetCount),colors=[],radii=[];
+// Poloha telesa v čase dedí polohu Slnka, takže drift premietne do celej reťaze.
+function bodyPos(i,t){const b=bodies[i];const p=b.parent<0?sunPos(t):bodyPos(b.parent,t);if(!b.orbit)return p;const a=TWO*b.speed*t+b.phase;return p.add(new THREE.Vector3(b.orbit*Math.cos(a),b.orbit*Math.sin(a),0))}
+function disc(radius,color,parent){const geo=new THREE.CircleGeometry(radius,48),material=mat(color);shared.push(geo,material);const mesh=new THREE.Mesh(geo,material);parent.add(mesh);return mesh}
+let orbitRings=new THREE.Group(),flatBodies=[];
+function buildFlat(){
+ flat.clear();orbitRings=new THREE.Group();flat.add(orbitRings);flatBodies=[];
+ for(let i=0;i<bodies.length;i++)flatBodies.push(disc(bodies[i].r,bodies[i].color,flat));
+ for(let i=1;i<bodies.length;i++){const b=bodies[i];if(b.parent!==0||!b.orbit)continue;const geo=new THREE.RingGeometry(b.orbit-.009,b.orbit+.009,160),material=mat(0x45617b,.4);shared.push(geo,material);const ring=new THREE.Mesh(geo,material);ring.position.z=-.08;orbitRings.add(ring)}
+}
 const starsGeo=new THREE.BufferGeometry(),stars=[];for(let i=0;i<800;i++){stars.push((Math.random()-.5)*95,(Math.random()-.5)*65,-25-Math.random()*40)}starsGeo.setAttribute('position',new THREE.Float32BufferAttribute(stars,3));scene.add(new THREE.Points(starsGeo,new THREE.PointsMaterial({color:0x66819e,size:.045,sizeAttenuation:true})));
 const sliceGroup=new THREE.Group();world.add(sliceGroup);const slice=new THREE.Mesh(new THREE.PlaneGeometry(17.5,17.5),mat(0x6cdbff,.065,{depthWrite:false}));sliceGroup.add(slice);const edges=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5)),new THREE.LineBasicMaterial({color:0x65e3fa,transparent:true,opacity:.85}));sliceGroup.add(edges);
 const layerGroup=new THREE.Group();block.add(layerGroup);const tubeGroup=new THREE.Group();block.add(tubeGroup);
-function tubePath(which){let pts=[];for(let i=0;i<=steps;i++){const t=i/steps;let p=which===0?new THREE.Vector3():pos(which,t);if(which===3){p=pos(1,t);let a=TWO*3.2*t+.3;p.x+=(.36+.1)*Math.cos(a);p.y+=(.36+.1)*Math.sin(a)}p.z=H*(t-.5);pts.push(p)}return new THREE.CatmullRomCurve3(pts)}
-const colors=[0xffc46a,0x62d9fc,0xc19cff,0xff6f9f],radii=[.82,.36,.48,.09];
-// Nepriehľadné svetové trubice, normálne osvetlenie a skutočný depth test.
-const tubes=[],endCaps=[],paths=[];
+const tubes=[],endCaps=[];
 // Jedna vodorovná orezávacia rovina pre všetky svetové trubice.
 renderer.localClippingEnabled=true;
 const cutPlane=new THREE.Plane(new THREE.Vector3(0,0,-1),0);
 // Svetová trubica je časová extrúzia priestorového kotúča: v každom okamihu
 // leží kotúč s polomerom planéty v rovine kolmej na časovú os. Prienik s
 // rovinou času je preto kruh a zhoduje sa s kotúčom v PIP náhľade.
-function extrudedWorldTube(path,radius,segments){
- const position=[],index=[];
- for(let s=0;s<=steps;s++){
-  const c=path.getPoint(s/steps);
-  for(let a=0;a<=segments;a++){
-   const th=a/segments*TWO;
-   position.push(c.x+radius*Math.cos(th),c.y+radius*Math.sin(th),c.z);
+function extrudedWorldTube(sample,radius,segments){
+ const rows=steps+1,cols=segments+1;
+ const position=new Float32Array(rows*cols*3),normal=new Float32Array(rows*cols*3);
+ // Normála plochy je pri časovej extrúzii presne (cos θ, sin θ, 0), takže ju netreba počítať z trojuholníkov.
+ const nx=new Float32Array(cols),ny=new Float32Array(cols);
+ for(let a=0;a<cols;a++){const th=a/segments*TWO;nx[a]=Math.cos(th);ny[a]=Math.sin(th)}
+ for(let s=0;s<rows;s++){
+  const c=sample(s/steps);
+  for(let a=0;a<cols;a++){
+   const o=(s*cols+a)*3;
+   position[o]=c.x+radius*nx[a];position[o+1]=c.y+radius*ny[a];position[o+2]=c.z;
+   normal[o]=nx[a];normal[o+1]=ny[a];
   }
  }
+ const index=rows*cols>65535?new Uint32Array(steps*segments*6):new Uint16Array(steps*segments*6);
+ let k=0;
  for(let s=0;s<steps;s++)for(let a=0;a<segments;a++){
-  const i0=s*(segments+1)+a,i1=i0+1,j0=(s+1)*(segments+1)+a,j1=j0+1;
-  index.push(i0,i1,j0,i1,j1,j0);
+  const i0=s*cols+a,i1=i0+1,j0=(s+1)*cols+a,j1=j0+1;
+  index[k++]=i0;index[k++]=i1;index[k++]=j0;index[k++]=i1;index[k++]=j1;index[k++]=j0;
  }
  const geometry=new THREE.BufferGeometry();
- geometry.setAttribute('position',new THREE.Float32BufferAttribute(position,3));
- geometry.setIndex(index);
- geometry.computeVertexNormals();
+ geometry.setAttribute('position',new THREE.BufferAttribute(position,3));
+ geometry.setAttribute('normal',new THREE.BufferAttribute(normal,3));
+ geometry.setIndex(new THREE.BufferAttribute(index,1));
  return geometry;
 }
-for(let i=0;i<4;i++){
- const path=tubePath(i);paths.push(path);
- const geometry=extrudedWorldTube(path,radii[i],i===0?24:14);
+function buildTubes(){
+ for(const mesh of [...tubes,...endCaps]){mesh.geometry.dispose();mesh.material.dispose()}
+ tubes.length=0;endCaps.length=0;tubeGroup.clear();
+ for(let i=0;i<bodies.length;i++){
+ // bodyPos vracia priestorovú polohu (z=0); čas sa mapuje na os z presne ako v starej krivke.
+ const geometry=extrudedWorldTube(t=>{const p=bodyPos(i,t);p.z=H*(t-.5);return p},radii[i],i===0?24:14);
  const material=new THREE.MeshStandardMaterial({color:colors[i],roughness:i===0?.42:.54,metalness:.08,side:THREE.FrontSide,emissive:i===0?0xff8c20:0x000000,emissiveIntensity:i===0?.38:0,clippingPlanes:[cutPlane]});
  const mesh=new THREE.Mesh(geometry,material);mesh.frustumCulled=false;tubeGroup.add(mesh);tubes.push(mesh);
  // Uzáver leží priamo v orezávacej rovine, takže je to ten istý kruh ako v 2D reze.
  const capMaterial=new THREE.MeshStandardMaterial({color:colors[i],roughness:.55,metalness:.08,side:THREE.DoubleSide,emissive:i===0?0xff8c20:0x000000,emissiveIntensity:i===0?.38:0});
  const cap=new THREE.Mesh(new THREE.CircleGeometry(radii[i],64),capMaterial);tubeGroup.add(cap);endCaps.push(cap);
+ }
 }
 // Slnko vyžaruje svetlo po celej časovej osi, nie iba v jednej snímke.
 scene.remove(light);
@@ -73,29 +107,60 @@ function setRevealedTime(t){
  for(let i=0;i<tubes.length;i++){
   tubes[i].visible=t>0;
   const cap=endCaps[i];cap.visible=t>0;
-  // getPoint nie getPointAt: parameter je čas, takže z presne sedí na rovinu rezu.
-  const p=paths[i].getPoint(t);
+  // Uzáver sedí presne na rovinu rezu: bodyPos vracia priestorovú polohu v čase t.
+  const p=bodyPos(i,t);
   // Malý offset eliminuje z-fighting s orezaným povrchom.
   cap.position.set(p.x,p.y,z+.002);
  }
 }
-for(let i=0;i<layerCount;i++){const t=i/(layerCount-1),z=H*(t-.5),group=new THREE.Group();group.position.z=z;let pane=new THREE.Mesh(new THREE.PlaneGeometry(17.5,17.5),mat(0x4ca2d0,.085,{depthWrite:false}));group.add(pane);let border=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5)),new THREE.LineBasicMaterial({color:0x65e3fa,transparent:true,opacity:.28}));group.add(border);for(let j=0;j<3;j++){let p=j===0?new THREE.Vector3():pos(j,t);let circle=new THREE.Mesh(new THREE.CircleGeometry(radii[j],24),mat(colors[j],.2,{depthWrite:false}));circle.position.set(p.x,p.y,.025);group.add(circle)}layerGroup.add(group)}
+// Geometrie a materiály vrstiev a kariet sa opakujú tisíckrát — vytvoria sa raz a uvoľnia sa naraz.
+const shared=[];
+function clearShared(){for(const o of shared)o.dispose();shared.length=0}
+function buildLayers(){
+ layerGroup.clear();
+ const paneGeo=new THREE.PlaneGeometry(17.5,17.5),borderGeo=new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5));
+ const paneMat=mat(0x4ca2d0,.085,{depthWrite:false}),borderMat=new THREE.LineBasicMaterial({color:0x65e3fa,transparent:true,opacity:.28});
+ shared.push(paneGeo,borderGeo,paneMat,borderMat);
+ const discGeo=bodies.map(b=>new THREE.CircleGeometry(b.r,24)),discMat=bodies.map(b=>mat(b.color,.2,{depthWrite:false}));
+ shared.push(...discGeo,...discMat);
+ for(let i=0;i<layerCount;i++){const t=i/(layerCount-1),z=H*(t-.5),group=new THREE.Group();group.position.z=z;group.add(new THREE.Mesh(paneGeo,paneMat));group.add(new THREE.LineSegments(borderGeo,borderMat));for(let j=0;j<bodies.length;j++){let p=bodyPos(j,t);let circle=new THREE.Mesh(discGeo[j],discMat[j]);circle.position.set(p.x,p.y,.025);group.add(circle)}layerGroup.add(group)}
+}
 // Každá karta predstavuje úplný dvojrozmerný vesmír v konkrétnom čase.
 const cards=new THREE.Group();block.add(cards);
-for(let i=0;i<48;i++){let t=i/47,card=new THREE.Group();card.position.z=H*(t-.5);let sheet=new THREE.Mesh(new THREE.PlaneGeometry(17.5,17.5),mat(0x153956,.12,{depthWrite:false}));card.add(sheet);let frame=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5)),new THREE.LineBasicMaterial({color:0x70dffc,transparent:true,opacity:.75}));card.add(frame);for(let j=0;j<4;j++){let v=j===0?new THREE.Vector3():j===3?pos(1,t):pos(j,t);if(j===3){let a=TWO*3.2*t+.3;v.x+=.46*Math.cos(a);v.y+=.46*Math.sin(a)}let disk=new THREE.Mesh(new THREE.CircleGeometry(radii[j],32),mat(colors[j],.9,{depthWrite:false}));disk.position.set(v.x,v.y,.04);card.add(disk)}cards.add(card)}
+function buildCards(){
+ cards.clear();
+ const sheetGeo=new THREE.PlaneGeometry(17.5,17.5),frameGeo=new THREE.EdgesGeometry(new THREE.PlaneGeometry(17.5,17.5));
+ const sheetMat=mat(0x153956,.12,{depthWrite:false}),frameMat=new THREE.LineBasicMaterial({color:0x70dffc,transparent:true,opacity:.75});
+ shared.push(sheetGeo,frameGeo,sheetMat,frameMat);
+ const discGeo=bodies.map(b=>new THREE.CircleGeometry(b.r,32)),discMat=bodies.map(b=>mat(b.color,.9,{depthWrite:false}));
+ shared.push(...discGeo,...discMat);
+ for(let i=0;i<48;i++){let t=i/47,card=new THREE.Group();card.position.z=H*(t-.5);card.add(new THREE.Mesh(sheetGeo,sheetMat));card.add(new THREE.LineSegments(frameGeo,frameMat));for(let j=0;j<bodies.length;j++){let v=bodyPos(j,t);let disk=new THREE.Mesh(discGeo[j],discMat[j]);disk.position.set(v.x,v.y,.04);card.add(disk)}cards.add(card)}
+}
 const axes=new THREE.Group();block.add(axes);let axis=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-9,-9,-9),new THREE.Vector3(-9,-9,9)]),new THREE.LineBasicMaterial({color:0x9aaeca}));axes.add(axis);const cone=new THREE.Mesh(new THREE.ConeGeometry(.18,.5,12),mat(0x9aaeca));cone.rotation.x=Math.PI/2;cone.position.set(-9,-9,9);axes.add(cone);
-function updateFlat(t){let a=pos(1,t),b=pos(2,t);p1.position.set(a.x,a.y,.06);p2.position.set(b.x,b.y,.06);let k=TWO*3.2*t+.3;person.position.set(a.x+.46*Math.cos(k),a.y+.46*Math.sin(k),.12);sliceGroup.position.z=H*(t-.5)}
+function updateFlat(t){const s=bodyPos(0,t);orbitRings.position.set(s.x,s.y,0);for(let i=0;i<bodies.length;i++){const p=bodyPos(i,t);flatBodies[i].position.set(p.x,p.y,.06+i*.015)}sliceGroup.position.z=H*(t-.5)}
 const pip=$('pip'),ctx=$('pipCanvas').getContext('2d');
-function drawPip(t){const w=620,c=w/2,scale=32;ctx.clearRect(0,0,w,w);ctx.fillStyle='#071323';ctx.fillRect(0,0,w,w);ctx.strokeStyle='#31536d';ctx.lineWidth=1.4;for(const r of [3.5,6.3]){ctx.beginPath();ctx.arc(c,c,r*scale,0,TWO);ctx.stroke()}for(let j=0;j<4;j++){let p=j===0?new THREE.Vector3():j===3?pos(1,t):pos(j,t);if(j===3){let a=TWO*3.2*t+.3;p.x+=.46*Math.cos(a);p.y+=.46*Math.sin(a)}ctx.beginPath();ctx.arc(c+p.x*scale,c-p.y*scale,radii[j]*scale,0,TWO);ctx.fillStyle='#'+colors[j].toString(16).padStart(6,'0');ctx.fill()}ctx.strokeStyle='#64d9fb';ctx.strokeRect(26,26,568,568);$('pipTime').textContent='t = '+t.toFixed(3)}
+function drawPip(t){const w=620,c=w/2,scale=32;ctx.clearRect(0,0,w,w);ctx.fillStyle='#071323';ctx.fillRect(0,0,w,w);ctx.strokeStyle='#31536d';ctx.lineWidth=1.4;const s=bodyPos(0,t);for(let i=1;i<bodies.length;i++){const b=bodies[i];if(b.parent!==0||!b.orbit)continue;ctx.beginPath();ctx.arc(c+s.x*scale,c-s.y*scale,b.orbit*scale,0,TWO);ctx.stroke()}for(let j=0;j<bodies.length;j++){const p=bodyPos(j,t);ctx.beginPath();ctx.arc(c+p.x*scale,c-p.y*scale,radii[j]*scale,0,TWO);ctx.fillStyle='#'+colors[j].toString(16).padStart(6,'0');ctx.fill()}ctx.strokeStyle='#64d9fb';ctx.strokeRect(26,26,568,568);$('pipTime').textContent='t = '+t.toFixed(3)}
 let state='intro',paused=false,elapsed=0,previous=performance.now(),time=0,playing=false;const duration=62;
 const chapters=[{start:0,end:13,label:'01 / 05 · Dvojrozmerný svet',text:'Toto je celý dvojrozmerný vesmír. Jeho objekty sa pohybujú v čase.'},{start:13,end:23,label:'02 / 05 · Zastavený okamih',text:'Zastavme čas. Tento okamih je jedna ohraničená karta.'},{start:23,end:43,label:'03 / 05 · Skladanie snímok',text:'Nakladajme na seba ďalšie a ďalšie okamihy, ako karty v balíčku.'},{start:43,end:53,label:'04 / 05 · Spojitý časopriestor',text:'Keď je snímok nekonečne veľa, vytvoria súvislé svetové trubice.'},{start:53,end:62,label:'05 / 05 · Blokový vesmír',text:'Celá história existuje v jedinom statickom geometrickom bloku.'}];
 function smooth(a,b,x){let t=THREE.MathUtils.clamp((x-a)/(b-a),0,1);return t*t*(3-2*t)}
-function showExploration(){state='explore';elapsed=duration;paused=false;playing=false;orbit.enabled=true;orbit.target.set(0,0,0);$('skip').style.display='none';$('chapterLabel').textContent='INTERAKTÍVNY REŽIM';$('chapterText').textContent='Slider odhaľuje históriu až po zvolený okamih. PIP ukazuje zodpovedajúci 2D rez.';$('status').textContent='Interaktívny režim';for(let id of ['three','time','auto'])$(id).disabled=false;$('play').textContent='▶ Spustiť úvod';$('three').textContent='◎ Zobraziť celý blok';pip.style.display='block';time=.5;$('time').value=500;updateFlat(time);drawPip(time);$('timeValue').textContent='t = 0.500';flat.visible=false;block.visible=true;cards.visible=false;layerGroup.visible=false;tubeGroup.visible=true;axes.visible=true;sliceGroup.visible=true;setRevealedTime(time);}
-function restart(){state='intro';elapsed=0;paused=false;playing=false;orbit.enabled=false;orbit.target.set(0,0,0);camera.position.set(0,0,28);camera.lookAt(0,0,0);$('skip').style.display='block';pip.style.display='none';$('play').textContent='❚❚ Pozastaviť úvod';$('status').textContent='Prebieha úvodná animácia';for(let id of ['three','time','auto'])$(id).disabled=true;}
+function showExploration(){state='explore';elapsed=duration;paused=false;playing=false;orbit.enabled=true;orbit.target.set(0,0,0);$('skip').style.display='none';$('chapterLabel').textContent='INTERAKTÍVNY REŽIM';$('chapterText').textContent='Slider odhaľuje históriu až po zvolený okamih. PIP ukazuje zodpovedajúci 2D rez.';$('status').textContent='Interaktívny režim';for(let id of ['three','time','auto','planets','sunMotion'])$(id).disabled=false;$('play').textContent='▶ Spustiť úvod';$('three').textContent='◎ Zobraziť celý blok';pip.style.display='block';time=.5;$('time').value=500;updateFlat(time);drawPip(time);$('timeValue').textContent='t = 0.500';flat.visible=false;block.visible=true;cards.visible=false;layerGroup.visible=false;tubeGroup.visible=true;axes.visible=true;sliceGroup.visible=true;setRevealedTime(time);}
+function restart(){state='intro';elapsed=0;paused=false;playing=false;orbit.enabled=false;orbit.target.set(0,0,0);camera.position.set(0,0,28);camera.lookAt(0,0,0);$('skip').style.display='block';pip.style.display='none';$('play').textContent='❚❚ Pozastaviť úvod';$('status').textContent='Prebieha úvodná animácia';for(let id of ['three','time','auto','planets','sunMotion'])$(id).disabled=true;}
 $('skip').onclick=showExploration;$('replay').onclick=restart;$('play').onclick=()=>{if(state==='explore'){restart();return}paused=!paused;$('play').textContent=paused?'▶ Pokračovať':'❚❚ Pozastaviť úvod'};
 $('three').onclick=()=>{if(state==='explore'){time=1;$('time').value=1000;updateFlat(time);drawPip(time);setRevealedTime(time);$('timeValue').textContent='t = 1.000';}};
 $('time').oninput=e=>{time=+e.target.value/1000;updateFlat(time);drawPip(time);setRevealedTime(time);$('timeValue').textContent='t = '+time.toFixed(3)};
 $('auto').onclick=()=>{playing=!playing;$('auto').textContent=playing?'❚❚ Zastaviť čas':'▶ Prehrávať čas'};
+function buildLegend(){$('legend').innerHTML=bodies.map(b=>'<span><i class="dot" style="background:#'+b.color.toString(16).padStart(6,'0')+'"></i>'+b.name+'</span>').join('')}
+// Prestavba celého sveta podľa aktuálneho počtu planét a stavu driftu Slnka.
+function rebuildBodies(){
+ clearShared();
+ bodies=makeBodies(planetCount);
+ colors=bodies.map(b=>b.color);radii=bodies.map(b=>b.r);
+ buildFlat();buildTubes();buildLayers();buildCards();buildLegend();
+ updateFlat(time);drawPip(time);setRevealedTime(time);
+}
+$('planets').oninput=e=>{$('planetCount').textContent=e.target.value};
+$('planets').onchange=e=>{planetCount=+e.target.value;rebuildBodies()};
+$('sunMotion').onclick=()=>{sunDrifts=!sunDrifts;$('sunMotion').classList.toggle('active',sunDrifts);rebuildBodies()};
 renderer.domElement.ondblclick=()=>{orbit.target.set(0,0,0);camera.position.set(19,-21,19);orbit.update()};
 function animate(now){requestAnimationFrame(animate);const dt=Math.min((now-previous)/1000,.06);previous=now;
 if(state==='intro'){if(!paused)elapsed+=dt;if(elapsed>=duration){showExploration()}else{let c=chapters.find(x=>elapsed>=x.start&&elapsed<x.end)||chapters[0];$('chapterLabel').textContent=c.label;$('chapterText').textContent=c.text;$('progress').style.width=(elapsed/duration*100)+'%';
@@ -112,5 +177,6 @@ camera.lookAt(0,0,0);
 }}
 else{if(playing){time=(time+dt*.075)%1;$('time').value=Math.round(time*1000);$('timeValue').textContent='t = '+time.toFixed(3);updateFlat(time);drawPip(time);setRevealedTime(time)}block.visible=true;flat.visible=false;cards.visible=false;layerGroup.visible=false;tubeGroup.visible=true;axes.visible=true;sliceGroup.visible=true;orbit.update()}
 renderer.render(scene,camera)}
+rebuildBodies();
 requestAnimationFrame(animate);window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
 </script></body></html>
